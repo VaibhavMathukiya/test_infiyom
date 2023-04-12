@@ -12,6 +12,7 @@ exports.userslogin = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
+    // const user = await User.findOne({ email: req.body.email });
     const user = await User.findOne({ email: req.body.email });
 
     const isvalid = await bcryptjs.compare(req.body.password, user.password);
@@ -42,7 +43,7 @@ exports.Registection = async (req, res) => {
 };
 
 exports.registection = async (req, res) => {
-  // let email = req.body.email
+  let email = req.body.email
   const files = req.file;
   try {
     const user = new User({

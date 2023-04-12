@@ -12,7 +12,7 @@
 //     if(email && password){
 //       let exitingUser = await User.findOne({email:email},select('password'))
 //       if(exitingUser){
-//         let match = await bcryptjs.compare(password,exitingUser.password)
+        // let match = await bcryptjs.compare(password,exitingUser.password)
 //         if(match){
 //           req.session.user = exitingUser._id
 //           res.redirect("/")
