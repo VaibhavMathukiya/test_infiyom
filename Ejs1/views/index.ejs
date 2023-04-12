@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .pagination {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .pagination a {
+            text-decoration: none;
+            color: #00695c;
+            padding: 0.5rem;
+            border: 1px solid #00695c;
+            margin: 0 1rem;
+        }
+
+        .pagination a:hover,
+        .pagination a:active,
+        .pagination a.active {
+            background: #00695c;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <%if(messages && messages.length){%>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <%= messages[0] %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+        <%}%>
+            <%if(messagesDel && messagesDel.length){%>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <%= messagesDel[0] %>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <%}%>
+                    <h1 align="center">User List</h1>
+                    <h2><a href="logout">Logout</a></h2>
+                    <table class="table">
+                        <div>
+                            <div>
+                                <tr>
+                                    <th>Frist Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email address</th>
+                                    <th>Phone Number</th>
+                                    <th>Profile Picture</th>
+                                    <th colspan="2">Action</th>
+                                </tr>
+
+                                <% users.forEach(function(user) { %>
+                                    <tr>
+
+                                        <td>
+                                            <%= user.fristName%>
+                                        </td>
+                                        <td>
+                                            <%= user.lastName%>
+                                        </td>
+                                        <td>
+                                            <%= user.email%>
+                                        </td>
+                                        <td>
+                                            <%= user. phone%>
+                                        </td>
+                                        <td>
+                                            <img src="/profile/<%= user. image%>" alt="Profileimg" width="80px"
+                                                height="80px" />
+                                        </td>
+
+                                        <td> <a href="/delete/<%= user.id%>" class="btn btn-danger">Delete</a>
+                                            <a href="/update/<%= user.id%>" class="btn btn-primary">Edit</a>
+                                        </td>
+                                    </tr>
+
+                                    <%})%>
+
+
+                            </div>
+                        </div>
+                    </table>
+
+
+                    <section class="pagination justify-content-center">
+                        <%if(currentPage !==1 && previousPage !==1){%>
+                            <a href="?page=1"> 1 </a>
+                            <%}%>
+
+                        <% if(hasPreviousPaage){%>
+                            <a href="?page=<%= previousPage %>"><%= previousPage%></a>  
+                            <%}%>
+
+                            <a href="?page=<%= currentPage %>" class="action"><%= currentPage %></a>
+
+                        <% if(hasNextPage){%>
+                            <a href="?page=<%= nextPage %>"><%= nextPage %></a>                                         
+                                <%}%>
+
+                        <% if(lastPage!==currentPage && nextPage !==lastPage){%>
+                            <a href="?page=<%= lastPage%>"><%= lastPage%></a>
+                            <%}%>
+
+
+                    </section>
+
+
+
+
+                    <script src="https://code.jquery.com/jquery-3.6.4.js"
+                        integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+                        crossorigin="anonymous"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js"
+                        integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="
+                        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                    <script src="../public/script.js"></script>
+</body>
+
+</html>
